@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "test": "",
+    "lint": "eslint .",
     "build": "rm -rf dist && NODE_ENV=production webpack",
     "start": "webpack serve"
   },
