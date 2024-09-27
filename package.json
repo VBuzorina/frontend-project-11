@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hexlet-boilerplates/webpack-package.git"
+    "url": "git+https://git@github.com/VBuzorina/frontend-project-11.git"
   },
-  "author": "Kirill Mokevnin",
+  "author": "VBuzorina",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/hexlet-boilerplates/webpack-package/issues"
+    "url": "https://github.com/VBuzorina/frontend-project-11/issues"
   },
-  "homepage": "https://github.com/hexlet-boilerplates/webpack-package#readme",
+  "homepage": "https://github.com/VBuzorina/frontend-project-11#readme",
   "jest": {
     "verbose": true,
     "testEnvironmentOptions": {
@@ -28,7 +28,7 @@
     },
     "testEnvironment": "jsdom"
   },
-  "main": "src/init.js",
+  "main": "src/index.js",
   "devDependencies": {
     "@babel/core": "^7.20.12",
     "@babel/eslint-parser": "^7.19.1",
