@@ -7,7 +7,7 @@ export default {
       readCompletely: 'Читать полностью',
       close: 'Закрыть',
       projectTitle: 'RSS агрегатор',
-      startRead: 'Начните читать RSS прямо сейчас!',
+      startRead: 'Начните читать RSS сегодня! Это легко, это красиво.',
       placeholder: 'Ссылка RSS',
       add: 'Добавить',
       exampleRss: 'Пример: https://lorem-rss.hexlet.app/feed',
