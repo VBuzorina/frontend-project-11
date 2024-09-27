@@ -1,7 +1,7 @@
 {
   "name": "@hexlet/code",
   "version": "0.1.0",
-  "description": "",
+  "description": "RSS-aggregator",
   "type": "module",
   "scripts": {
     "test": "jest --colors"
@@ -56,11 +56,13 @@
     "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.8",
     "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
     "i18next": "^23.15.1",
     "npm-check-updates": "^16.6.2",
     "on-change": "^5.0.1",
+    "popper.js": "^1.16.1",
     "yup": "^1.4.0"
   }
 }
