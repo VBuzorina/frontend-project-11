@@ -4,9 +4,9 @@
   "description": "RSS-aggregator",
   "type": "module",
   "scripts": {
-    "test": "",
+    "test": "npx jest",
     "lint": "eslint .",
-    "build": "rm -rf dist && NODE_ENV=production webpack",
+    "build": "NODE_ENV=production webpack --mode production",
     "start": "webpack serve"
   },
   "repository": {
