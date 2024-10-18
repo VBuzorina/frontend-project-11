@@ -14,6 +14,14 @@ const createUrl = (rssFeed) => {
   return proxiedUrl;
 };
 
+const handleResponse = (response, watchedState) => {
+  const newPosts = getParsedData(response.data.contents).posts;
+  const oldTitles = new Set(watchedState.posts.map((post) => post.titlePost));
+  const filteredNewPost = newPosts.filter((post) => !oldTitles.has(post.titlePost));
+  const newPostsWithId = filteredNewPost.map((post) => ({ id: _.uniqueId(), ...post }));
+  newPostsWithId.map((post) => watchedState.posts.unshift(post));
+};
+
 export default async () => {
   const i18n = i18next.createInstance();
   await i18n.init({
@@ -96,14 +104,8 @@ export default async () => {
   const updateData = (feeds, interval = 5000) => {
     setTimeout(() => {
       const newPromise = feeds.flat().map((feed) => axios.get(createUrl(feed.link))
-        .then((response) => {
-          const newPosts = getParsedData(response.data.contents).posts;
-          const oldTitles = new Set(watchedState.posts.map((post) => post.titlePost));
-          const filteredNewPost = newPosts.filter((post) => !oldTitles.has(post.titlePost));
-          const newPostsWithId = filteredNewPost.map((post) => ({ id: _.uniqueId(), ...post }));
-          newPostsWithId.map((post) => watchedState.posts.unshift(post));
-        }).catch((error) => errorHandler(error)));
-
+        .then((response) => handleResponse(response, watchedState))
+        .catch((error) => errorHandler(error)));
       Promise.all(newPromise)
         .finally(() => updateData(feeds));
     }, interval);
