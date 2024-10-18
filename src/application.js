@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import * as yup from 'yup';
 import i18next from 'i18next';
 import axios from 'axios';
@@ -20,6 +21,14 @@ const handleResponse = (response, watchedState) => {
   const filteredNewPost = newPosts.filter((post) => !oldTitles.has(post.titlePost));
   const newPostsWithId = filteredNewPost.map((post) => ({ id: _.uniqueId(), ...post }));
   newPostsWithId.map((post) => watchedState.posts.unshift(post));
+};
+
+const handleDataResponse = (response, watchedState, url) => {
+  const parsedData = getParsedData(response.data.contents);
+  const feedsWithUrl = { link: url, ...parsedData.feeds };
+  const initial = parsedData.posts.map((item) => ({ id: _.uniqueId(), ...item }));
+  watchedState.feeds = [...watchedState.feeds, feedsWithUrl];
+  watchedState.posts = [...watchedState.posts, ...initial];
 };
 
 export default async () => {
@@ -93,13 +102,7 @@ export default async () => {
   };
 
   const getHTTPresponseData = (url) => axios.get(createUrl(url))
-    .then((response) => {
-      const parsedData = getParsedData(response.data.contents);
-      const feedsWithUrl = { link: url, ...parsedData.feeds };
-      const initial = parsedData.posts.map((item) => ({ id: _.uniqueId(), ...item }));
-      watchedState.feeds = [...watchedState.feeds, feedsWithUrl];
-      watchedState.posts = [...watchedState.posts, ...initial];
-    });
+    .then((response) => handleDataResponse(response, watchedState, url));
 
   const updateData = (feeds, interval = 5000) => {
     setTimeout(() => {
