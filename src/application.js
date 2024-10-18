@@ -15,6 +15,13 @@ const createUrl = (rssFeed) => {
 };
 
 export default async () => {
+  const i18n = i18next.createInstance();
+  await i18n.init({
+    lng: 'ru',
+    debug: true,
+    resources,
+  });
+
   const elements = {
     init: {
       readCompletelyEl: document.querySelector('.full-article'),
@@ -65,13 +72,6 @@ export default async () => {
     opened: [],
     watchedPosts: new Set(),
   };
-
-  const i18n = i18next.createInstance();
-  i18n.init({
-    lng: 'ru',
-    debug: true,
-    resources,
-  });
 
   const watchedState = view(state, elements, i18n);
   watchedState.process = 'init';
